@@ -9,18 +9,29 @@ import app.database.requests as rq
 
 router = Router()
 
+'''
 class Register(StatesGroup):
      name = State()
      age = State()
      number = State()
-
+'''
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
     await rq.set_user(message.from_user.id)
     await message.answer('Добро пожаровать!', reply_markup=kb.main)
 
+@router.message(F.text == 'Каталог')
+async def catalog (message: Message):
+    await message.answer('Выберите категорую товара', reply_markup=await kb.categories())
 
+@router.callback_query(F.data.startswitch('category_'))
+async def category(callback: CallbackQuery):
+    await callback.answer('Вы выбрали категорию')
+    await callback.answer('Выберите товар по категории', reply_markup=await kb.items(callback.data.split('_')[1]))
+
+
+'''
 @router.message(Command('help'))
 async def cmd_help(message: Message):
     await message.answer('Вы нажали на кнопку помощи')
@@ -59,3 +70,4 @@ async def register_number(message: Message, state: FSMContext):
     data = await state.get_data()
     await message.answer(f'Ваше имя: {data["name"]}\nВаш возраст: {data["age"]}\nВаш номер: {data["number"]}')
     await state.clear()
+'''
