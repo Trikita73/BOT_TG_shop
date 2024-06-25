@@ -25,10 +25,11 @@ async def cmd_start(message: Message):
 async def catalog (message: Message):
     await message.answer('Выберите категорую товара', reply_markup=await kb.categories())
 
-@router.callback_query(F.data.startswitch('category_'))
+@router.callback_query(F.data.startswith('category_'))
 async def category(callback: CallbackQuery):
     await callback.answer('Вы выбрали категорию')
-    await callback.answer('Выберите товар по категории', reply_markup=await kb.items(callback.data.split('_')[1]))
+    await callback.message.answer('Выберите товар по категории', 
+                                  reply_markup=await kb.items(callback.data.split('_')[1]))
 
 
 '''

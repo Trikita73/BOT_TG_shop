@@ -23,7 +23,7 @@ async def categories():
     return keyboard.adjust(2).as_markup()
 
 async def items(category_id):
-    all_categories = await get_category_item(category_id)
+    all_items = await get_category_item(category_id)
     keyboard = InlineKeyboardBuilder()
     for item in all_items:
         keyboard.add(InlineKeyboardButton(text=item.name, callback_data=f"item{item.id}"))
