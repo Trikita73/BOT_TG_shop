@@ -27,7 +27,7 @@ async def items(category_id):
     keyboard = InlineKeyboardBuilder()
     for item in all_items:
         keyboard.add(InlineKeyboardButton(text=item.name, callback_data=f"item{item.id}"))
-    keyboard.add(InlineKeyboardButton(text='На главную', callback_data='to_main'))
+    keyboard.add(InlineKeyboardButton(text='На главную', callback_data='to_main')) 
     return keyboard.adjust(2).as_markup()
 
 

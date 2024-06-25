@@ -28,8 +28,7 @@ async def catalog (message: Message):
 @router.callback_query(F.data.startswith('category_'))
 async def category(callback: CallbackQuery):
     await callback.answer('Вы выбрали категорию')
-    await callback.message.answer('Выберите товар по категории', 
-                                  reply_markup=await kb.items(callback.data.split('_')[1]))
+    await callback.answer('Выберите товар по категории', reply_markup=await kb.items(callback.data.split('_')[1]))
 
 
 '''
