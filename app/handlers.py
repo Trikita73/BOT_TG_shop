@@ -25,6 +25,11 @@ async def cmd_start(message: Message):
 async def catalog (message: Message):
     await message.answer('Выберите категорую товара', reply_markup=await kb.categories())
 
+@router.callback_query(F.data.startswith('to_main'))
+async def cmd_start(message: Message):
+    await rq.set_user(message.from_user.id)
+    await message.answer('Главное меню', reply_markup=await kb.categories())
+
 @router.callback_query(F.data.startswith('category_'))
 async def category(callback: CallbackQuery):
     await callback.answer('Вы выбрали категорию')
