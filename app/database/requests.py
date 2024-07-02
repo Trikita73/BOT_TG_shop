@@ -1,5 +1,5 @@
 from app.database.models import async_session
-from app.database.models import User, Category, Item
+from app.database.models import User, Category, Item, Contact
 from sqlalchemy import select
 
 async def set_user(tg_id):
@@ -21,4 +21,8 @@ async def get_category_item(category_id):
     
 async def get_item(item_id):
     async with async_session() as session:
-        return await session.scalar(select(Item).where(Item.id == item_id))
+        return await session.scalars(select(Item).where(Item.id == item_id))
+    
+async def get_contacts():
+    async with async_session() as session:
+        return await session.scalars(select(Contact))

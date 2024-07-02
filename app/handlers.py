@@ -43,6 +43,10 @@ async def category(callback: CallbackQuery):
     await callback.answer('Вы выбрали товар')
     await callback.message.answer(f'Название: {item_data.name}\nОписание: {item_data.description}\nЦена: {item_data.price}$', 
                                   reply_markup=await kb.items(callback.data.split('_')[1]))
+    
+@router.callback_query(F.text == 'Контакты')
+async def contact (message: Message):
+    await message.answer('Выберите категорую товара', reply_markup=await kb.categories())
 
 '''
 @router.message(Command('help'))
