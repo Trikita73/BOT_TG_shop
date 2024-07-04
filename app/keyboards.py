@@ -33,7 +33,7 @@ async def contancts():
     all_contacts = await get_contacts()
     keyboard = InlineKeyboardBuilder()
     for contact in all_contacts:
-        keyboard.add(InlineKeyboardButton(text=contact.name, callback_data=f"contact_{contact.id}"))
+        keyboard.add(InlineKeyboardButton(text=contact.name, callback_data=f"contact"))
     return keyboard.adjust(2).as_markup()
 
 
