@@ -21,15 +21,10 @@ async def cmd_start(message: Message):
     await rq.set_user(message.from_user.id)
     await message.answer('Добро пожаровать!', reply_markup=kb.main)
 
+
 @router.message(F.text == 'Каталог')
 async def catalog (message: Message):
     await message.answer('Выберите категорую товара', reply_markup=await kb.categories())
-
-@router.callback_query(F.data.startswith('to_main'))
-async def category(callback: CallbackQuery):
-    await callback.answer('Главное меню, категории товара')
-    await callback.message.answer('Выберите категорую товара', 
-                                  reply_markup=await kb.categories())
 
 @router.callback_query(F.data.startswith('category_'))
 async def category(callback: CallbackQuery):
@@ -44,15 +39,29 @@ async def category(callback: CallbackQuery):
     await callback.message.answer(f'Название: {item_data.name}\nОписание: {item_data.description}\nЦена: {item_data.price}$', 
                                   reply_markup=await kb.items(callback.data.split('_')[1]))
     
+
+
 @router.message(F.text == 'Контакты')
 async def contact (Message: Message):
     await Message.answer('Наши контакты', reply_markup=await kb.contancts())
 
+@router.callback_query(F.data.startswith('category_'))
+async def category(callback: CallbackQuery):
+    await callback.answer('Вы выбрали наши контакты')
+    await callback.message.answer('Выберите кнопку', reply_markup=await kb.items(callback.data.split('_')[1]))
+
+@router.callback_query(F.data.startswith('contact_'))
+async def contact(callback: CallbackQuery):
+    contact_data = await rq.get_contacts(callback.data.split('_')[1])
+    await callback.message.answer(f'Our Contacts: {contact_data.description}', reply_markup=await kb.items(callback.data.split('_')[1]))
 
 
 
-
-
+@router.callback_query(F.data.startswith('to_main'))
+async def category(callback: CallbackQuery):
+    await callback.answer('Главное меню, категории товара')
+    await callback.message.answer('Выберите категорую товара', 
+                                  reply_markup=await kb.categories())
 
 '''
 @router.message(Command('help'))

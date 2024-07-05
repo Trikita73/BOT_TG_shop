@@ -26,3 +26,7 @@ async def get_item(item_id):
 async def get_contacts():
     async with async_session() as session:
         return await session.scalars(select(Contact))
+    
+async def get_contact(contact_id):
+    async with async_session() as session:
+        return await session.scalars(select(Item).where(Item.id == contact_id))
