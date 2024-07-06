@@ -41,19 +41,9 @@ async def category(callback: CallbackQuery):
     
 
 
-@router.message(F.text == 'Контакты')
-async def contact (Message: Message):
-    await Message.answer('Наши контакты', reply_markup=await kb.contancts())
 
-@router.callback_query(F.data.startswith('category_'))
-async def category(callback: CallbackQuery):
-    await callback.answer('Вы выбрали наши контакты')
-    await callback.message.answer('Выберите кнопку', reply_markup=await kb.items(callback.data.split('_')[1]))
 
-@router.callback_query(F.data.startswith('contact_'))
-async def contact(callback: CallbackQuery):
-    contact_data = await rq.get_contacts(callback.data.split('_')[1])
-    await callback.message.answer(f'Our Contacts: {contact_data.description}', reply_markup=await kb.items(callback.data.split('_')[1]))
+
 
 
 
