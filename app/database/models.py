@@ -35,7 +35,10 @@ class Contact(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(25))
-    description: Mapped[str] = mapped_column(String(255))
+    city: Mapped[str] = mapped_column(String(120))
+    street: Mapped[str] = mapped_column(String(225))
+    phone: Mapped[int] = mapped_column()
+
 
 async def async_main():
     async with engine.begin() as conn:
