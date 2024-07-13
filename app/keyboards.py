@@ -3,7 +3,7 @@ from aiogram.types import (ReplyKeyboardMarkup, KeyboardButton,
 
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from app.database.requests import get_categories, get_category_item, get_all_contacts
+from app.database.requests import get_categories, get_category_item #get_all_contacts
 
 main = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Каталог')],
                                      [KeyboardButton(text='Корзина')],
@@ -30,9 +30,7 @@ async def items(category_id):
     return keyboard.adjust(2).as_markup()
 
 
-
 # inline keyboard 
-
 '''
 catalog = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text='T-shirt', callback_data='t-shirt')],

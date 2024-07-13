@@ -1,8 +1,8 @@
 from app.database.models import async_session
-from app.database.models import User, Category, Item, Contact
+from app.database.models import User, Category, Item #Contact
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker 
 
 async def set_user(tg_id):
     async with async_session() as session:
@@ -24,13 +24,16 @@ async def get_category_item(category_id):
 async def get_item(item_id):
     async with async_session() as session:
         return await session.scalar(select(Item).where(Item.id == item_id))
-    
+
+
+# Contact with Error (db) 
+'''  
 async def get_all_contacts():
     async with AsyncSession() as session:
         query = select(Contact)  # Create a select query
         result = await session.execute(query)  # Execute the query
         return result.scalars().all()  # Fetch and return all results
-
+''' 
 
     
 

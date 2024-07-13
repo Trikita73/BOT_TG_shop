@@ -4,7 +4,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
 
-from app.database.requests import get_all_contacts
+# from app.database.requests import get_all_contacts
 
 import app.keyboards as kb
 import app.database.requests as rq
@@ -51,7 +51,9 @@ async def category(callback: CallbackQuery):
     await callback.message.answer('Выберите категорую товара', 
                                   reply_markup=await kb.categories())
 
-#Contact_Button
+
+#Contact_Button with Error (problem db)
+'''
 @router.message(F.text == 'Контакты')
 async def contact(message: Message):
     contacts_data = await get_all_contacts()  
@@ -64,6 +66,7 @@ async def contact(message: Message):
     else:
         message_text = "В базе данных нет контактов"  # Inform user if no contacts found
     await message.answer(message_text)
+'''
 
 '''
 @router.message(Command('help'))
