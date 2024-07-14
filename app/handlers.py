@@ -52,6 +52,16 @@ async def category(callback: CallbackQuery):
                                   reply_markup=await kb.categories())
 
 
+#Сontact_Button
+@router.message(F.text == 'Контакты')
+async def contact(message: Message):
+    #contact_text = "**Наши контакты:**\n"
+    contact_text = f"ул. Пушкина\n"
+    contact_text += f"дом. Колотушкина\n"
+    contact_text += f"Телефон: +3 999 999 99 99\n"
+    await message.answer('Наши контакты')
+    await message.answer(contact_text)
+
 #Contact_Button with Error (problem db)
 '''
 @router.message(F.text == 'Контакты')
