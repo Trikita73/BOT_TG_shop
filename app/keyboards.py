@@ -13,7 +13,6 @@ main = ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Каталог')],
                             input_field_placeholder='Choise menu item...')
 
 
-
 async def categories():
     all_categories = await get_categories() 
     keyboard = InlineKeyboardBuilder()
